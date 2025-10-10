@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Books near {{ userLocation }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let book of filteredBooks">
+    <ion-card-header>
+      <ion-card-title>{{ book.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Owner:</strong> {{ book.owner }}</p>
+      <p><strong>Location:</strong> {{ book.location }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

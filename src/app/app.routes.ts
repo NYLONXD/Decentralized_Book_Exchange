@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'get-started',
     loadComponent: () => import('./pages/get-started/get-started.page').then( m => m.GetStartedPage)
   },
+  {
+    path: 'books',
+    loadComponent: () => import('./pages/books/books.page').then( m => m.BooksPage)
+  },
 ];

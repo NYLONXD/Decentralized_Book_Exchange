@@ -16,20 +16,21 @@ export class SignupPage {
 
   constructor(private router: Router) {}
 
-  onSignup(form: NgForm) {
+  onSignup(form: NgForm) {  
     if (form.valid) {
-      console.log('Signup data:', form.value);
-      // TODO: Implement actual signup logic (API)
-      // Redirect to dashboard after successful signup
-      this.router.navigate(['/dashboard']);
+      const user = form.value;
+
+      // Store user data locally
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      // Navigate to books page
+      this.router.navigate(['/books']);
     } else {
       console.warn('Signup form is invalid');
     }
   }
 
-  onSocial(provider: string) {
-    console.log('Social signup with:', provider);
-    // TODO: Implement social signup logic
-    this.router.navigate(['/dashboard']);
+  onSocial(platform: string) {
+    console.log('Continue with', platform);
   }
 }
