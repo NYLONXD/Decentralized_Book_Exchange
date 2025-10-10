@@ -16,21 +16,40 @@ export class SignupPage {
 
   constructor(private router: Router) {}
 
-  onSignup(form: NgForm) {  
-    if (form.valid) {
-      const user = form.value;
-
-      // Store user data locally
-      localStorage.setItem('currentUser', JSON.stringify(user));
-
-      // Navigate to books page
-      this.router.navigate(['/books']);
-    } else {
-      console.warn('Signup form is invalid');
+  onSignup(form: NgForm) {
+    if (form.invalid) {
+      alert('Please fill all required fields!');
+      return;
     }
+
+    const { name, email, password, confirmPassword, address } = form.value;
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    // Get previous users or empty array
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // Check if user already exists
+    if (users.find((u: any) => u.email === email)) {
+      alert('User already exists! Please log in.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // Create new user and save
+    const newUser = { name, email, password, address };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+    alert('Signup successful!');
+    this.router.navigate(['/books']); // redirect after signup
   }
 
   onSocial(platform: string) {
-    console.log('Continue with', platform);
+    alert(`Social login with ${platform} is disabled in demo mode.`);
   }
 }
