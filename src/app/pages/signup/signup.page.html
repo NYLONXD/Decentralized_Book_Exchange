@@ -1,0 +1,118 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding auth-bg">
+  <!-- Center container -->
+  <div class="auth-wrapper">
+    <!-- App header / logo -->
+    <div class="auth-brand">
+      <ion-avatar>
+        <!-- Replace with your logo -->
+        <img src="assets/icon/favicon.png" alt="logo" />
+      </ion-avatar>
+      <h1>Create account</h1>
+      <p class="muted">Get started — it's quick and easy.</p>
+    </div>
+
+    <!-- Card with form -->
+    <ion-card class="auth-card">
+      <ion-card-content>
+        <form (ngSubmit)="onSignup(signupForm)" #signupForm="ngForm" novalidate>
+          <!-- Full name -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Full name</ion-label>
+            <ion-input name="name" ngModel required type="text" autocomplete="name"></ion-input>
+          </ion-item>
+
+          <!-- Email -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input name="email" ngModel required type="email" autocomplete="email"></ion-input>
+          </ion-item>
+
+          <!-- Password with toggle -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input
+              name="password"
+              ngModel
+              required
+              [type]="showPassword ? 'text' : 'password'"
+              autocomplete="new-password"
+            ></ion-input>
+            <ion-button
+              slot="end"
+              fill="clear"
+              size="small"
+              (click)="showPassword = !showPassword"
+              type="button"
+              aria-label="Toggle password visibility"
+            >
+              <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <!-- Confirm Password -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input
+              name="confirmPassword"
+              ngModel
+              required
+              [type]="showPassword ? 'text' : 'password'"
+              autocomplete="new-password"
+            ></ion-input>
+          </ion-item>
+
+          <!-- Terms -->
+          <ion-item lines="none" class="ion-margin-vertical">
+            <ion-checkbox slot="start" name="accept" ngModel required></ion-checkbox>
+            <ion-label>
+              I agree to the
+              <a href="#" (click)="$event.preventDefault()">Terms</a> and
+              <a href="#" (click)="$event.preventDefault()">Privacy Policy</a>.
+            </ion-label>
+          </ion-item>
+
+          <!-- Signup button -->
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="signupForm.invalid"
+            class="ion-margin-top ion-margin-bottom"
+          >
+            Create Account
+          </ion-button>
+
+          <!-- OR divider -->
+          <div class="or-divider" aria-hidden>
+            <span>OR</span>
+          </div>
+
+          <!-- Social buttons -->
+          <div class="social-row">
+            <ion-button fill="outline" expand="block" (click)="onSocial('google')" class="social-btn">
+              <ion-icon slot="start" name="logo-google"></ion-icon>
+              Continue with Google
+            </ion-button>
+            <ion-button fill="outline" expand="block" (click)="onSocial('facebook')" class="social-btn">
+              <ion-icon slot="start" name="logo-facebook"></ion-icon>
+              Continue with Facebook
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Footer: login link -->
+    <div class="auth-footer">
+      <p>
+        Already have an account?
+        <a routerLink="/login">Log in</a>
+      </p>
+    </div>
+  </div>
+</ion-content>

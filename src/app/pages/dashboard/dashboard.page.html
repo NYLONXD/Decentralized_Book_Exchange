@@ -1,0 +1,120 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+    
+    <ion-buttons slot="end">
+      <!-- Logout Button with Icon -->
+     <ion-button fill="clear" (click)="logout()" title="Logout" color="red">
+  <ion-icon name="log-out-outline"></ion-icon>Logout
+</ion-button>
+
+
+
+      <!-- User Avatar -->
+      <ion-avatar>
+        <img [src]="userProfileUrl" alt="User" />
+      </ion-avatar>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding dashboard-bg">
+
+  <!-- Intro Section -->
+  <div class="intro-text">
+    <h2>Welcome Back!</h2>
+    <span>
+      Explore new books, trade securely, and discover amazing reads from fellow users in our 
+      decentralized book exchange.
+    </span>
+    <!-- <img src="assets/Admin.jpg" alt="Administrator smiling at a desk with bookshelves in the background" class="admin-img"/> -->
+  </div>
+
+  <!-- Info Cards -->
+  <ion-card class="info-card">
+    <ion-card-header>
+      <ion-card-title>About the App</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      This is a decentralized platform that allows users to trade and exchange books securely, 
+      without intermediaries.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="info-card">
+    <ion-card-header>
+      <ion-card-title>Features</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <li>Decentralized & secure</li>
+        <li>Trade or exchange books</li>
+        <li>User-friendly interface</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Book Grid -->
+  <div class="book-grid">
+    <ion-card class="book-card" *ngFor="let book of books">
+      <img [src]="book.image" alt="{{ book.title }}" class="book-img"/>
+      <ion-card-header>
+        <ion-card-title>{{ book.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Price:</strong> {{ book.price }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+<!-- Bootstrap Carousel Section -->
+<div class="carousel-container mt-4">
+  <h2 class="text-center mb-3 bg-success">Most sales book </h2>
+  <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+    
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/harry_potter.jpg" class="d-block w-100" alt="Harry Potter">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Harry Potter and the Sorcerer's Stone</h5>
+          <p>Author: J.K. Rowling | Price: $25</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/youcandoit.jpg" class="d-block w-100" alt="You Can Do It">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>You Can Do It</h5>
+          <p>Author: Dr. A.P.J. Abdul Kalam | Price: $15</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/darkpsychology.jpg" class="d-block w-100" alt="Dark Psychology">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Dark Psychology</h5>
+          <p>Author: Dr. Shefali | Price: $22</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</div>
+
+
+
+</ion-content>

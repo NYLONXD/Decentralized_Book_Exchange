@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding get-started-bg">
+  <div class="get-started-wrapper">
+    
+    <!-- App Logo -->
+    <ion-avatar class="app-logo">
+      <img src="assets/icon/favicon.png" alt="App Logo" />
+    </ion-avatar>
+
+    <!-- Main Heading -->  
+    <h1 class="main-heading">Decentralized Book Exchange</h1>
+
+    <!-- Detailed description -->
+    <p class="description">
+      Welcome to the Decentralized Book Exchange! Our platform allows you to securely trade, share, 
+      and discover books with fellow readers. Say goodbye to middlemen and enjoy a community-driven 
+      experience where you can find rare books, swap your favorites, and connect with passionate 
+      readers. Our platform is secure, easy to use, and fully decentralized.
+    </p>
+
+    <p class="description">
+      Whether you are looking for a new read, want to share your collection, or explore literary treasures, 
+      you can do it all here. Start your journey with a simple click and join the decentralized book revolution today!
+    </p>
+
+    <!-- Get Started Button -->
+    <ion-button expand="block" size="small" color="primary" (click)="goToSignup()">Get Started</ion-button>
+
+    <!-- Login/Signup buttons
+    <div class="auth-buttons">
+      <ion-button expand="block" (click)="goToSignup()">Sign Up</ion-button>
+      <ion-button expand="block" fill="outline" (click)="goToLogin()">Log In</ion-button>
+    </div> -->
+
+<!-- write a program to change the text  of a heading  -->
+  <div class="CA-heading">
+      <p>
+        {{ headingText }}
+      </p>
+      <button (click)="changeON()">text</button>
+      <button (click)="changeOFF()">Back</button>
+    </div>
+
+
+   
+
+
+
+  </div>
+</ion-content>

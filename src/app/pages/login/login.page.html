@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding auth-bg">
+  <div class="auth-wrapper">
+    <div class="auth-brand">
+      <ion-avatar>
+        <img src="assets/icon/favicon.png" alt="logo" />
+      </ion-avatar>
+      <h1>Welcome Back</h1>
+      <p class="muted">Login to your account</p>
+    </div>
+
+    <ion-card class="auth-card">
+      <ion-card-content>
+        <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm" novalidate>
+          <!-- Email -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input name="email" ngModel required type="email" autocomplete="email"></ion-input>
+          </ion-item>
+
+          <!-- Password -->
+          <ion-item lines="full" class="ion-margin-bottom">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input name="password" ngModel required type="password" autocomplete="current-password"></ion-input>
+          </ion-item>
+
+          <!-- Login button -->
+          <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
+            Log In
+          </ion-button>
+        </form>
+
+        <!-- Divider -->
+        <div class="or-divider" aria-hidden>
+          <span>OR</span>
+        </div>
+
+        <!-- Social login buttons -->
+        <div class="social-row">
+          <ion-button fill="outline" expand="block" (click)="onSocial('google')" class="social-btn">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Continue with Google
+          </ion-button>
+          <ion-button fill="outline" expand="block" (click)="onSocial('facebook')" class="social-btn">
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            Continue with Facebook
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Footer: link to signup -->
+    <div class="auth-footer">
+      <p>
+        Don't have an account?
+        <a routerLink="/signup">Sign up</a>
+      </p>
+    </div>
+  </div>
+</ion-content>
