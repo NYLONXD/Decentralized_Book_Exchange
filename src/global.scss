@@ -35,3 +35,48 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Global app background ---------------------------------------------------
+	 - Recommended: download the background image into `src/assets/` (e.g.
+		 `src/assets/app-bg.jpg`) and reference it with the `--app-bg-image` var.
+	 - As a fallback you can keep a remote URL (slower, depends on network).
+*/
+:root {
+	/* Try a local asset first. If you don't have a local copy, replace the URL
+		 below with a remote URL or use the commented example. */
+	--app-bg-image: url('assets/back.jpg');
+	/* --app-bg-image: url('https://img.freepik.com/free-vector/beautiful-book-club-pattern-illustration_23-2149330102.jpg'); */
+}
+
+html, body, app-root, ion-app {
+	height: 100%;
+}
+
+/* Apply background to the app root so every page shares it */
+app-root,
+ion-app,
+ion-router-outlet,
+.ion-page,
+body {
+	background-image: linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.28)), var(--app-bg-image);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed; /* optional: remove on mobile if unwanted */
+}
+
+/* Ensure Ionic page/content backgrounds are transparent so the global
+	 background remains visible. Use component-specific overrides if needed. */
+ion-content, ion-app, .ion-page {
+	--background: transparent;
+	background: transparent !important;
+}
+
+/* Small-screen performance: disable fixed attachment on small devices */
+@media (max-width: 600px) {
+	app-root, ion-app, body {
+		background-attachment: scroll;
+	}
+}
+
+

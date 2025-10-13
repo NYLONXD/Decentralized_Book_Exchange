@@ -1,0 +1,740 @@
+// Header Styling
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    --color: #e8e9ed;
+    --border-width: 0;
+    
+    ion-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+}
+
+// Main Auth Background
+.auth-bg {
+  --background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+  position: relative;
+  
+  // Animated background particles
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(123, 47, 247, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+    animation: particleFloat 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+// Center wrapper
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease;
+}
+
+// Brand section
+.auth-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  ion-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+
+    // Animated gradient border
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d9ff, #7b2ff7, #ff006e, #00d9ff);
+      background-size: 300% 300%;
+      animation: gradientRotate 4s ease infinite;
+      z-index: -1;
+    }
+
+    // Glow effect
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(123, 47, 247, 0.3));
+      filter: blur(15px);
+      opacity: 0.6;
+      z-index: -2;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0a0e27;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00d9ff 0%, #7b2ff7 50%, #ff006e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .muted {
+    color: #9ca3af;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+// Main card
+.auth-card {
+  background: rgba(17, 18, 22, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(0, 217, 255, 0.1);
+  margin: 0;
+  width: 100%;
+  max-width: 500px;
+  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+
+  // Animated glow effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+    pointer-events: none;
+  }
+
+  ion-card-content {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Form items
+  ion-item {
+    --background: rgba(255, 255, 255, 0.03);
+    --border-color: rgba(0, 217, 255, 0.2);
+    --border-width: 1px;
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 8px;
+    --highlight-color-focused: #00d9ff;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    // Animated border on focus
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &.item-has-focus {
+      --background: rgba(0, 217, 255, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 217, 255, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      --background: rgba(0, 217, 255, 0.04);
+    }
+
+    ion-label {
+      --color: #b8bcc8;
+      font-weight: 500;
+      font-size: 0.9rem;
+      
+      &.label-floating {
+        transform: translateY(0);
+      }
+    }
+
+    ion-input {
+      --color: #e8e9ed;
+      --placeholder-color: #6b7280;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    // Checkbox item
+    &.ion-margin-vertical {
+      --background: transparent;
+      --border-width: 0;
+      margin: 1.5rem 0;
+      
+      ion-label {
+        font-size: 0.9rem;
+        color: #b8bcc8;
+        margin-left: 0.5rem;
+        
+        a {
+          color: #00d9ff;
+          text-decoration: none;
+          font-weight: 600;
+          position: relative;
+          transition: color 0.3s ease;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #00d9ff;
+            transition: width 0.3s ease;
+          }
+
+          &:hover {
+            color: #7b2ff7;
+
+            &::after {
+              width: 100%;
+              background: linear-gradient(90deg, #00d9ff, #7b2ff7);
+            }
+          }
+        }
+      }
+
+      ion-checkbox {
+        --border-radius: 6px;
+        --border-color: rgba(0, 217, 255, 0.4);
+        --border-width: 2px;
+        --background-checked: linear-gradient(135deg, #00d9ff, #7b2ff7);
+        --checkmark-color: #fff;
+        --size: 22px;
+        margin-right: 0.5rem;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    // Password toggle button
+    ion-button {
+      --color: #9ca3af;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      margin: 0;
+      transition: all 0.3s ease;
+
+      ion-icon {
+        font-size: 1.3rem;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        --color: #00d9ff;
+
+        ion-icon {
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+
+  // Submit button
+  ion-button[type="submit"] {
+    --background: linear-gradient(135deg, #00d9ff 0%, #7b2ff7 100%);
+    --background-hover: linear-gradient(135deg, #00f0ff 0%, #8b3fff 100%);
+    --border-radius: 12px;
+    --box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+    --color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    height: 52px;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    // Shimmer effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      --box-shadow: 0 12px 30px rgba(0, 217, 255, 0.4);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    &[disabled] {
+      --background: rgba(255, 255, 255, 0.1);
+      --color: #6b7280;
+      --box-shadow: none;
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}
+
+// OR divider
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+  }
+
+  span {
+    padding: 0 1rem;
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+}
+
+// Social buttons
+.social-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .social-btn {
+    --border-color: rgba(0, 217, 255, 0.3);
+    --border-width: 1px;
+    --border-radius: 12px;
+    --color: #e8e9ed;
+    --background: rgba(255, 255, 255, 0.03);
+    --background-hover: rgba(0, 217, 255, 0.08);
+    --box-shadow: none;
+    height: 48px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    // Gradient border on hover
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+    //   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    ion-icon {
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      --border-color: rgba(0, 217, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 217, 255, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+
+      ion-icon {
+        transform: scale(1.15) rotate(5deg);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Footer
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  animation: fadeIn 1s ease 0.3s backwards;
+
+  p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin: 0;
+
+    a {
+      color: #00d9ff;
+      text-decoration: none;
+      font-weight: 700;
+      margin-left: 0.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #00d9ff, #7b2ff7);
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: #7b2ff7;
+        letter-spacing: 0.5px;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes gradientRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .auth-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-brand {
+    margin-bottom: 1.5rem;
+
+    ion-avatar {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .muted {
+      font-size: 0.9rem;
+    }
+  }
+
+  .auth-card {
+    ion-card-content {
+      padding: 1.5rem;
+    }
+
+    ion-button[type="submit"] {
+      height: 48px;
+      font-size: 0.95rem;
+    }
+  }
+
+  .social-row .social-btn {
+    height: 44px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .auth-brand {
+    ion-avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .muted {
+      font-size: 0.85rem;
+    }
+  }
+
+  .auth-card {
+    border-radius: 20px;
+
+    ion-card-content {
+      padding: 1.25rem;
+    }
+
+    ion-item {
+      --padding-start: 12px;
+      --padding-end: 12px;
+
+      ion-label {
+        font-size: 0.85rem;
+      }
+
+      ion-input {
+        font-size: 0.95rem;
+      }
+    }
+
+    ion-button[type="submit"] {
+      height: 46px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .or-divider {
+    margin: 1.5rem 0;
+
+    span {
+      font-size: 0.85rem;
+    }
+  }
+
+  .social-row .social-btn {
+    height: 42px;
+    font-size: 0.85rem;
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+
+  .auth-footer p {
+    font-size: 0.9rem;
+  }
+}
+
+// Landscape mode adjustments
+@media (max-height: 700px) and (orientation: landscape) {
+  .auth-wrapper {
+    padding: 1rem;
+  }
+
+  .auth-brand {
+    margin-bottom: 1rem;
+
+    ion-avatar {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .muted {
+      font-size: 0.8rem;
+    }
+  }
+
+  .auth-card {
+    ion-card-content {
+      padding: 1rem;
+    }
+
+    ion-item {
+      margin-bottom: 0.75rem;
+    }
+
+    ion-button[type="submit"] {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .or-divider {
+    margin: 1rem 0;
+  }
+
+  .social-row {
+    gap: 0.75rem;
+  }
+
+  .auth-footer {
+    margin-top: 1rem;
+  }
+}

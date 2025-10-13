@@ -1,42 +1,370 @@
+// Variables
+$primary-color: #007bff;
+$text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+$button-shadow: 0 8px 24px rgba(0, 123, 255, 0.4);
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 .get-started-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 20px;
-  padding: 30px 20px;
+  gap: 30px;
+  padding: 40px 20px;
+  animation: fadeInScale 0.8s ease-out;
 
   .app-logo {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 15px;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+    transition: $transition;
+    position: relative;
+
+    &::after {
+      content: '❤️';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 2rem;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px rgba(255, 0, 0, 0.4));
+    }
+
+    &:hover {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
+    }
   }
 
   .main-heading {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: $text-shadow;
+    color: #ffffff;
+    position: relative;
+    animation: slideDown 0.8s ease-out 0.2s backwards;
+
+    &::before {
+      content: '✨';
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    &::after {
+      content: '✨';
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      animation: twinkle 2s ease-in-out infinite 1s;
+    }
+
+    // Heart decoration in text
+    span {
+      display: inline-block;
+      color: #ff4757;
+      text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
   }
 
   .description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.8;
     max-width: 600px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
+    animation: fadeIn 1s ease-out 0.4s backwards;
+
+    strong {
+      font-weight: 800;
+      color: #ffd93d;
+      text-shadow: 0 2px 8px rgba(255, 217, 61, 0.6);
+    }
   }
 
   .auth-buttons {
     width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 16px;
+    margin-top: 20px;
+    animation: slideUp 0.8s ease-out 0.6s backwards;
   }
 }
 
 button {
-  font-size: 1.1rem;
-  padding: 12px;
-  margin: 4px;
-    border-radius: 8px;
-    border: 7px solid #007bff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 16px 32px;
+  margin: 0;
+  border-radius: 16px;
+  border: 4px solid transparent;
+  cursor: pointer;
+  transition: $transition;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: $button-shadow;
+
+  // Primary button style
+  &.primary-btn {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #ffffff;
+    border-color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    &:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(0, 123, 255, 0.6);
+      border-color: #ffd93d;
+
+      &::before {
+        width: 400px;
+        height: 400px;
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(1);
+    }
+  }
+
+  // Secondary button style
+  &.secondary-btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
+
+    &::after {
+      content: '→';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: $transition;
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #007bff;
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 12px 32px rgba(0, 123, 255, 0.5);
+
+      &::after {
+        right: 15px;
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(1);
+    }
+  }
+
+  // Outline button style
+  &.outline-btn {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px) scale(1.02);
+      border-color: #ffd93d;
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(1);
+    }
+  }
+
+  // Icon inside button
+  ion-icon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-right: 8px;
+    transition: $transition;
+  }
+
+  &:hover ion-icon {
+    transform: scale(1.2);
+  }
+}
+
+// Animations
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(-50%) scale(0.8);
+  }
+}
+
+// Responsive design
+@media (max-width: 576px) {
+  .get-started-wrapper {
+    padding: 30px 15px;
+    gap: 20px;
+
+    .app-logo {
+      width: 110px;
+      height: 110px;
+
+      &::after {
+        font-size: 1.5rem;
+        top: -5px;
+        right: -5px;
+      }
+    }
+
+    .main-heading {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+
+      &::before,
+      &::after {
+        font-size: 1.3rem;
+        left: -30px;
+      }
+
+      &::after {
+        right: -30px;
+      }
+    }
+
+    .description {
+      font-size: 1rem;
+    }
+
+    .auth-buttons {
+      max-width: 100%;
+    }
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 14px 24px;
+    letter-spacing: 1px;
+    border-radius: 12px;
+  }
+}
+
+// Extra small devices
+@media (max-width: 360px) {
+  .get-started-wrapper {
+    .main-heading {
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
