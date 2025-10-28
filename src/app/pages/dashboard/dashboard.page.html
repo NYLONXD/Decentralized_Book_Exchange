@@ -1,15 +1,15 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>📊 Admin Dashboard</ion-title>
     
     <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="logout()" title="Logout" color="danger">
+      <ion-button fill="clear" (click)="logout()" title="Logout" color="light">
         <ion-icon name="log-out-outline"></ion-icon>
         Logout
       </ion-button>
 
       <ion-avatar>
-        <img [src]="userProfileUrl" alt="User" />
+        <img [src]="userProfileUrl" alt="Admin" />
       </ion-avatar>
     </ion-buttons>
   </ion-toolbar>
@@ -17,18 +17,87 @@
 
 <ion-content class="ion-padding dashboard-bg">
 
-  <!-- Intro Section -->
+  <!-- Admin Welcome Section -->
   <div class="intro-text">
-    <h2>Welcome Back!</h2>
+    <h2>Welcome Back, {{ userName }}! 👨‍💼</h2>
     <span>
-      Explore new books, trade securely, and discover amazing reads from fellow users in our 
-      decentralized book exchange.
+      Monitor all books across different states, view statistics, and manage the decentralized book exchange platform.
     </span>
   </div>
 
-  <!-- Swiper Slider Section -->
+  <!-- Statistics Cards -->
+  <div class="stats-container">
+    <ion-card class="stat-card">
+      <ion-card-content>
+        <div class="stat-content">
+          <ion-icon name="people-outline" class="stat-icon"></ion-icon>
+          <div>
+            <h3>{{ totalUsers }}</h3>
+            <p>Total Users</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card">
+      <ion-card-content>
+        <div class="stat-content">
+          <ion-icon name="book-outline" class="stat-icon"></ion-icon>
+          <div>
+            <h3>{{ totalBooks }}</h3>
+            <p>Total Books</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card">
+      <ion-card-content>
+        <div class="stat-content">
+          <ion-icon name="location-outline" class="stat-icon"></ion-icon>
+          <div>
+            <h3>{{ locations.length - 1 }}</h3>
+            <p>Active States</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Books by State Breakdown -->
+  <ion-card class="breakdown-card">
+    <ion-card-header>
+      <ion-card-title>📍 Books Distribution by State</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="state-stats">
+        <div class="state-item" *ngFor="let location of locations">
+          <span class="location-name" *ngIf="location !== 'All'">{{ location }}</span>
+          <span class="book-count" *ngIf="location !== 'All'">{{ booksByState[location] || 0 }} books</span>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <ion-card>
+      <ion-card-content>
+        <div class="filter-content">
+          <ion-label class="filter-label">Filter by Location:</ion-label>
+          <ion-select [(ngModel)]="selectedLocation" (ionChange)="onLocationChange()" interface="popover" placeholder="Select State">
+            <ion-select-option *ngFor="let location of locations" [value]="location">
+              {{ location }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Featured Books Slider -->
   <div class="book-slider-section" *ngIf="books && books.length">
-    <h2 class="text-center mb-3 bg-success text-white p-2 rounded">🔥 Most Popular Books</h2>
+    <h2 class="text-center mb-3 bg-success text-white p-2 rounded">🔥 Featured Books</h2>
 
     <div class="swiper">
       <div class="swiper-wrapper">
@@ -46,48 +115,36 @@
         </div>
       </div>
       
-      <!-- Navigation buttons -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </div>
 
-  <!-- Info Cards -->
-  <ion-card class="info-card">
-    <ion-card-header>
-      <ion-card-title>About the App</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      This is a decentralized platform that allows users to trade and exchange books securely, 
-      without intermediaries.
-    </ion-card-content>
-  </ion-card>
+  <!-- All Books Grid (Filtered) -->
+  <div class="books-section">
+    <h2 class="section-title">
+      📚 All Books 
+      <span *ngIf="selectedLocation !== 'All'"> in {{ selectedLocation }}</span>
+      <span class="book-count-badge">{{ displayedBooks.length }}</span>
+    </h2>
 
-  <ion-card class="info-card">
-    <ion-card-header>
-      <ion-card-title>Features</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ul>
-        <li>Decentralized & secure</li>
-        <li>Trade or exchange books</li>
-        <li>User-friendly interface</li>
-      </ul>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Book Grid -->
-  <div class="book-grid">
-    <ion-card class="book-card" *ngFor="let book of books">
-      <img [src]="book.image" alt="{{ book.title }}" class="book-img"/>
-      <ion-card-header>
-        <ion-card-title>{{ book.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>Author:</strong> {{ book.author }}</p>
-        <p><strong>Price:</strong> {{ book.price }}</p>
-      </ion-card-content>
-    </ion-card>
+    <div class="book-grid">
+      <ion-card class="book-card-detailed" *ngFor="let book of displayedBooks">
+        <div class="book-badge">{{ book.location }}</div>
+        <img [src]="book.image" alt="{{ book.title }}" class="book-img"/>
+        <ion-card-header>
+          <ion-card-title>{{ book.title }}</ion-card-title>
+          <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="book-details">
+            <p><ion-icon name="person-outline"></ion-icon> <strong>Owner:</strong> {{ book.owner }}</p>
+            <p><ion-icon name="location-outline"></ion-icon> <strong>Location:</strong> {{ book.location }}</p>
+            <p class="price"><ion-icon name="pricetag-outline"></ion-icon> <strong>Price:</strong> {{ book.price }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
   <!-- Bootstrap Carousel Section -->

@@ -1,8 +1,11 @@
+// src/app/pages/signup/signup.page.ts
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -16,16 +19,45 @@ export class SignupPage {
 
   constructor(private router: Router) {}
 
-  onSignup(form: NgForm) {
+  // Toast configuration
+  private Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  async onSignup(form: NgForm) {
     if (form.invalid) {
-      alert('Please fill all required fields!');
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Please fill all required fields!',
+      });
       return;
     }
 
     const { name, email, password, confirmPassword, address } = form.value;
 
+    // Validate password match
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Passwords do not match!',
+      });
+      return;
+    }
+
+    // Validate password strength
+    if (password.length < 6) {
+      this.Toast.fire({
+        icon: 'warning',
+        title: 'Password must be at least 6 characters',
+      });
       return;
     }
 
@@ -34,8 +66,21 @@ export class SignupPage {
 
     // Check if user already exists
     if (users.find((u: any) => u.email === email)) {
-      alert('User already exists! Please log in.');
-      this.router.navigate(['/login']);
+      // Show warning and ask to login
+      const result = await Swal.fire({
+        title: 'User Already Exists!',
+        text: 'An account with this email already exists. Would you like to login instead?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, go to Login',
+        cancelButtonText: 'Cancel',
+      });
+
+      if (result.isConfirmed) {
+        this.router.navigate(['/login']);
+      }
       return;
     }
 
@@ -45,11 +90,25 @@ export class SignupPage {
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('currentUser', JSON.stringify(newUser));
 
-    alert('Signup successful!');
-    this.router.navigate(['/books']); // redirect after signup
+    // Show success message
+    await Swal.fire({
+      title: 'Success!',
+      text: 'Your account has been created successfully',
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continue',
+      timer: 2000,
+      timerProgressBar: true,
+    });
+
+    // Navigate to dashboard
+    this.router.navigate(['/dashboard']);
   }
 
-  onSocial(platform: string) {
-    alert(`Social login with ${platform} is disabled in demo mode.`);
+  async onSocial(platform: string) {
+    this.Toast.fire({
+      icon: 'info',
+      title: `${platform} login coming soon!`,
+    });
   }
 }

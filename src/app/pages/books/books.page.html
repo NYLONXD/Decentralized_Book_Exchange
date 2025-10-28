@@ -1,18 +1,36 @@
 <ion-header translucent="true">
-  <ion-toolbar color="dark">
-    <ion-title>📚 Nearby Books</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>📚 Book Exchange</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="logout()" title="Logout" color="light">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Logout
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="books-page ion-padding">
+  
+  <!-- User Info Header -->
   <div class="header">
-    <h2>Books around <span>{{ userLocation }}</span></h2>
-    <p>Showing books shared by students near your location.</p>
+    <h2>Welcome, <span class="user-name">{{ userName }}</span>! 👋</h2>
+    <p class="location-text">
+      <ion-icon name="location"></ion-icon>
+      Your Location: <strong>{{ userLocation }}</strong>
+    </p>
   </div>
 
-  <div class="books-grid">
-    <ion-card *ngFor="let book of filteredBooks" class="book-card">
-      <!-- 📘 Book Image -->
+  <!-- Books in User's Location -->
+  <div class="section-header">
+    <h3>📍 Books Available in Your Area ({{ userLocation }})</h3>
+    <p class="section-desc">You can exchange these books</p>
+  </div>
+
+  <div class="books-grid" *ngIf="filteredBooks.length > 0">
+    <ion-card *ngFor="let book of filteredBooks" class="book-card available">
+      <div class="availability-badge available-badge">Available</div>
+      
       <img [src]="book.image" alt="{{ book.title }}" class="book-image" />
 
       <ion-card-header>
@@ -21,15 +39,83 @@
       </ion-card-header>
 
       <ion-card-content>
-        <div class="owner-info">
-          <ion-icon name="person-outline"></ion-icon>
-          <span>{{ book.owner }}</span>
+        <div class="book-info">
+          <div class="info-item">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>{{ book.owner }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ book.location }}</span>
+          </div>
+          <div class="info-item price">
+            <ion-icon name="pricetag-outline"></ion-icon>
+            <span>{{ book.price }}</span>
+          </div>
         </div>
-        <div class="location-info">
-          <ion-icon name="location-outline"></ion-icon>
-          <span>{{ book.location }}</span>
-        </div>
+
+        <ion-button 
+          expand="block" 
+          color="success" 
+          (click)="onExchangeBook(book)"
+          class="exchange-btn">
+          <ion-icon name="swap-horizontal-outline" slot="start"></ion-icon>
+          Exchange Book
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
+
+  <div class="no-books" *ngIf="filteredBooks.length === 0">
+    <ion-icon name="book-outline"></ion-icon>
+    <p>No books available in your area yet</p>
+  </div>
+
+  <!-- Books from Other Locations -->
+  <div class="section-header other-section">
+    <h3>🌍 Books from Other Locations</h3>
+    <p class="section-desc">Browse books from other states (Exchange not available)</p>
+  </div>
+
+  <div class="books-grid" *ngIf="otherBooks.length > 0">
+    <ion-card *ngFor="let book of otherBooks" class="book-card unavailable">
+      <div class="availability-badge unavailable-badge">
+        Only in {{ book.location }}
+      </div>
+      
+      <img [src]="book.image" alt="{{ book.title }}" class="book-image" />
+
+      <ion-card-header>
+        <ion-card-title>{{ book.title }}</ion-card-title>
+        <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="book-info">
+          <div class="info-item">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>{{ book.owner }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ book.location }}</span>
+          </div>
+          <div class="info-item price">
+            <ion-icon name="pricetag-outline"></ion-icon>
+            <span>{{ book.price }}</span>
+          </div>
+        </div>
+
+        <ion-button 
+          expand="block" 
+          color="medium" 
+          disabled
+          class="exchange-btn disabled-btn">
+          <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+          Not Available in Your Area
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>

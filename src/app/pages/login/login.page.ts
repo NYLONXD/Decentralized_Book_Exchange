@@ -1,9 +1,12 @@
+// src/app/pages/login/login.page.ts
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -13,20 +16,89 @@ import { Router } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterModule],
 })
 export class LoginPage {
+  // Admin credentials
+  private readonly ADMIN_EMAIL = 'admin@gmail.com';
+  private readonly ADMIN_PASSWORD = 'admin123'; // You can change this
+
   constructor(private router: Router) {}
-  
-  onLogin(form: any) {
-    if (form.valid) {
-      console.log('Login form data:', form.value);
-      // TODO: Implement actual login logic here (e.g., API call)
-      this.router.navigate(['/dashboard']);
+
+  // Toast configuration
+  private Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  async onLogin(form: any) {
+    if (!form.valid) {
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Please fill all required fields',
+      });
+      return;
+    }
+
+    const { email, password } = form.value;
+
+    // Check if admin login
+    if (email === this.ADMIN_EMAIL && password === this.ADMIN_PASSWORD) {
+      const adminUser = {
+        name: 'Admin',
+        email: this.ADMIN_EMAIL,
+        role: 'admin',
+        address: 'All Locations',
+      };
+
+      localStorage.setItem('currentUser', JSON.stringify(adminUser));
+
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Admin logged in successfully',
+      });
+
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 1500);
+      return;
+    }
+
+    // Regular user login
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(
+      (u: any) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      // Add role to user
+      user.role = 'user';
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully',
+      });
+
+      setTimeout(() => {
+        this.router.navigate(['/books']);
+      }, 1500);
     } else {
-      console.warn('Invalid login form');
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Invalid email or password',
+      });
     }
   }
 
-  onSocial(provider: string) {
-    console.log('Social login with:', provider);
-    // TODO: Implement social login flow (e.g., OAuth)
+  async onSocial(provider: string) {
+    this.Toast.fire({
+      icon: 'info',
+      title: `${provider} login coming soon!`,
+    });
   }
 }
