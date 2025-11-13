@@ -29,14 +29,5 @@ export class GetStartedPage {
     this.router.navigate(['/login']);
   }
   
-    changeON() {
-    this.headingText = 'HELLO SIR FULL MARKS PLEASE';
-    console.log('Button clicked, text changed.');
-    // after clicking again on button 
-  }
-  changeOFF(){
-    this.headingText = 'NO MARKSSSSS';
-    console.log('Button clicked, text changed back.');
-  }
 }
  
