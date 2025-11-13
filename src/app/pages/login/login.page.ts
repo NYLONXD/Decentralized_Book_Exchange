@@ -27,9 +27,20 @@ export class LoginPage {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 3500,
     timerProgressBar: true,
+    background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+    color: '#e8e9ed',
+    iconColor: '#00d9ff',
+    customClass: {
+      popup: 'modern-toast-popup',
+      title: 'modern-toast-title',
+      icon: 'modern-toast-icon'
+    },
     didOpen: (toast) => {
+      toast.style.border = '1px solid rgba(0, 217, 255, 0.3)';
+      toast.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
+      toast.style.borderRadius = '16px';
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     },

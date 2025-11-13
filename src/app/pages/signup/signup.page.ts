@@ -24,9 +24,20 @@ export class SignupPage {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 3500,
     timerProgressBar: true,
+    background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+    color: '#e8e9ed',
+    iconColor: '#00d9ff',
+    customClass: {
+      popup: 'modern-toast-popup',
+      title: 'modern-toast-title',
+      icon: 'modern-toast-icon'
+    },
     didOpen: (toast) => {
+      toast.style.border = '1px solid rgba(0, 217, 255, 0.3)';
+      toast.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
+      toast.style.borderRadius = '16px';
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     },
@@ -69,13 +80,22 @@ export class SignupPage {
       // Show warning and ask to login
       const result = await Swal.fire({
         title: 'User Already Exists!',
-        text: 'An account with this email already exists. Would you like to login instead?',
+        html: '<p style="font-size: 1.05rem; margin-top: 1rem;">An account with this email already exists. Would you like to login instead?</p>',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#00d9ff',
+        cancelButtonColor: '#ff006e',
         confirmButtonText: 'Yes, go to Login',
         cancelButtonText: 'Cancel',
+        background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+        color: '#e8e9ed',
+        customClass: {
+          popup: 'modern-swal-popup',
+          title: 'modern-swal-title',
+          confirmButton: 'modern-swal-confirm',
+          cancelButton: 'modern-swal-cancel'
+        },
+        backdrop: 'rgba(0, 0, 0, 0.8)'
       });
 
       if (result.isConfirmed) {
@@ -93,12 +113,20 @@ export class SignupPage {
     // Show success message
     await Swal.fire({
       title: 'Success!',
-      text: 'Your account has been created successfully',
+      html: '<p style="font-size: 1.1rem; margin-top: 1rem;">Your account has been created successfully</p>',
       icon: 'success',
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#00d9ff',
       confirmButtonText: 'Continue',
-      timer: 2000,
+      timer: 2500,
       timerProgressBar: true,
+      background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+      color: '#e8e9ed',
+      customClass: {
+        popup: 'modern-swal-popup',
+        title: 'modern-swal-title',
+        confirmButton: 'modern-swal-confirm'
+      },
+      backdrop: 'rgba(0, 0, 0, 0.8)'
     });
 
     // Navigate to dashboard

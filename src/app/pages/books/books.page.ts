@@ -92,9 +92,19 @@ export class BooksPage implements OnInit {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 3500,
     timerProgressBar: true,
+    background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+    color: '#e8e9ed',
+    iconColor: '#00d9ff',
+    customClass: {
+      popup: 'modern-toast-popup',
+      title: 'modern-toast-title',
+      icon: 'modern-toast-icon'
+    },
     didOpen: (toast) => {
+      toast.style.border = '1px solid rgba(0, 217, 255, 0.3)';
+      toast.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     },
@@ -145,18 +155,30 @@ export class BooksPage implements OnInit {
     const result = await Swal.fire({
       title: 'Exchange Book?',
       html: `
-        <p><strong>Book:</strong> ${book.title}</p>
-        <p><strong>Owner:</strong> ${book.owner}</p>
-        <p><strong>Price:</strong> ${book.price}</p>
-        <br>
-        <p>Send an exchange request to ${book.owner}?</p>
+        <div style="text-align: left; padding: 1rem;">
+          <p style="margin: 0.5rem 0; font-size: 1rem;"><strong style="color: #00d9ff;">Book:</strong> ${book.title}</p>
+          <p style="margin: 0.5rem 0; font-size: 1rem;"><strong style="color: #00d9ff;">Owner:</strong> ${book.owner}</p>
+          <p style="margin: 0.5rem 0; font-size: 1rem;"><strong style="color: #00d9ff;">Price:</strong> ${book.price}</p>
+          <br>
+          <p style="text-align: center; font-size: 1.05rem; color: #e8e9ed;">Send an exchange request to <strong>${book.owner}</strong>?</p>
+        </div>
       `,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#00d9ff',
+      cancelButtonColor: '#ff006e',
       confirmButtonText: 'Yes, Send Request',
       cancelButtonText: 'Cancel',
+      background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+      color: '#e8e9ed',
+      customClass: {
+        popup: 'modern-swal-popup',
+        title: 'modern-swal-title',
+        htmlContainer: 'modern-swal-html',
+        confirmButton: 'modern-swal-confirm',
+        cancelButton: 'modern-swal-cancel'
+      },
+      backdrop: 'rgba(0, 0, 0, 0.8)'
     });
 
     if (result.isConfirmed) {

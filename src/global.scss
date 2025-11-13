@@ -26,6 +26,75 @@
 @import "@ionic/angular/css/flex-utils.css";
 @import 'sweetalert2/dist/sweetalert2.min.css';
 
+.modern-toast-popup {
+  border-radius: 16px !important;
+  backdrop-filter: blur(20px);
+}
+
+.modern-toast-title {
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+
+.modern-toast-icon {
+  border-width: 3px !important;
+}
+
+.modern-swal-popup {
+  border-radius: 24px !important;
+  border: 1px solid rgba(0, 217, 255, 0.3) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(20px);
+  padding: 2rem !important;
+}
+
+.modern-swal-title {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #00d9ff, #7b2ff7) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.modern-swal-html {
+  margin: 1.5rem 0 !important;
+}
+
+.modern-swal-confirm,
+.modern-swal-cancel {
+  border-radius: 12px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  text-transform: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+
+  &:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  }
+}
+
+.modern-swal-confirm {
+  background: linear-gradient(135deg, #00d9ff, #00b8d4) !important;
+
+  &:hover {
+    background: linear-gradient(135deg, #00f0ff, #00d0ea) !important;
+  }
+}
+
+.modern-swal-cancel {
+  background: linear-gradient(135deg, #ff006e, #d90056) !important;
+
+  &:hover {
+    background: linear-gradient(135deg, #ff1a7f, #e91065) !important;
+  }
+}
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
