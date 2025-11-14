@@ -1,3 +1,4 @@
+<!-- src/app/pages/signup/signup.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Sign up</ion-title>
@@ -10,7 +11,6 @@
     <!-- App header / logo -->
     <div class="auth-brand">
       <ion-avatar>
-        <!-- Replace with your logo -->
         <img src="assets/icon/favicon.png" alt="logo" />
       </ion-avatar>
       <h1>Create account</h1>
@@ -24,13 +24,27 @@
           <!-- Full name -->
           <ion-item lines="full" class="ion-margin-bottom">
             <ion-label position="floating">Full name</ion-label>
-            <ion-input name="name" ngModel required type="text" autocomplete="name"></ion-input>
+            <ion-input
+              name="name"
+              [(ngModel)]="formData.name"
+              required
+              type="text"
+              autocomplete="name"
+            >
+            </ion-input>
           </ion-item>
 
           <!-- Email -->
           <ion-item lines="full" class="ion-margin-bottom">
             <ion-label position="floating">Email</ion-label>
-            <ion-input name="email" ngModel required type="email" autocomplete="email"></ion-input>
+            <ion-input
+              name="email"
+              [(ngModel)]="formData.email"
+              required
+              type="email"
+              autocomplete="email"
+            >
+            </ion-input>
           </ion-item>
 
           <!-- Password with toggle -->
@@ -38,7 +52,7 @@
             <ion-label position="floating">Password</ion-label>
             <ion-input
               name="password"
-              ngModel
+              [(ngModel)]="formData.password"
               required
               [type]="showPassword ? 'text' : 'password'"
               autocomplete="new-password"
@@ -60,22 +74,72 @@
             <ion-label position="floating">Confirm Password</ion-label>
             <ion-input
               name="confirmPassword"
-              ngModel
+              [(ngModel)]="formData.confirmPassword"
               required
               [type]="showPassword ? 'text' : 'password'"
               autocomplete="new-password"
             ></ion-input>
           </ion-item>
-          <!-- address -->
-          <!-- Address -->
-<ion-item lines="full" class="ion-margin-bottom">
-  <ion-label position="floating">Address / Location</ion-label>
-  <ion-input name="address" ngModel required type="text" autocomplete="address"></ion-input>
-</ion-item>
+
+          <!-- Location Section -->
+          <div class="location-section">
+            <ion-item lines="full" class="ion-margin-bottom">
+              <ion-label position="floating">Location / City</ion-label>
+              <ion-select
+                name="address"
+                [(ngModel)]="formData.address"
+                required
+                interface="popover"
+                placeholder="Select your city"
+              >
+                <ion-select-option
+                  *ngFor="let location of availableLocations"
+                  [value]="location"
+                >
+                  {{ location }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <!-- Auto-detect Location Button -->
+            <ion-button
+              expand="block"
+              fill="outline"
+              [disabled]="isDetectingLocation"
+              (click)="detectLocation()"
+              class="detect-location-btn"
+              type="button"
+            >
+              <ion-icon
+                slot="start"
+                [name]="isDetectingLocation ? 'hourglass-outline' : 'location-outline'"
+              >
+              </ion-icon>
+              <span *ngIf="!isDetectingLocation">Auto-Detect My Location</span>
+              <span *ngIf="isDetectingLocation">Detecting Location...</span>
+              <ion-spinner
+                *ngIf="isDetectingLocation"
+                slot="end"
+                name="crescent"
+              >
+              </ion-spinner>
+            </ion-button>
+
+            <!-- Detected Location Display -->
+            <div class="detected-location" *ngIf="detectedLocation">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              <span>Detected: <strong>{{ detectedLocation }}</strong></span>
+            </div>
+          </div>
 
           <!-- Terms -->
           <ion-item lines="none" class="ion-margin-vertical">
-            <ion-checkbox slot="start" name="accept" ngModel required></ion-checkbox>
+            <ion-checkbox
+              slot="start"
+              name="accept"
+              ngModel
+              required
+            ></ion-checkbox>
             <ion-label>
               I agree to the
               <a href="#" (click)="$event.preventDefault()">Terms</a> and
@@ -100,11 +164,21 @@
 
           <!-- Social buttons -->
           <div class="social-row">
-            <ion-button fill="outline" expand="block" (click)="onSocial('google')" class="social-btn">
+            <ion-button
+              fill="outline"
+              expand="block"
+              (click)="onSocial('google')"
+              class="social-btn"
+            >
               <ion-icon slot="start" name="logo-google"></ion-icon>
               Continue with Google
             </ion-button>
-            <ion-button fill="outline" expand="block" (click)="onSocial('facebook')" class="social-btn">
+            <ion-button
+              fill="outline"
+              expand="block"
+              (click)="onSocial('facebook')"
+              class="social-btn"
+            >
               <ion-icon slot="start" name="logo-facebook"></ion-icon>
               Continue with Facebook
             </ion-button>

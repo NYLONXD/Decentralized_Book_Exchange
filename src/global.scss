@@ -24,28 +24,115 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import 'sweetalert2/dist/sweetalert2.min.css';
+@import "sweetalert2/dist/sweetalert2.min.css";
 
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+/* ============================================================================
+   SWEETALERT2 STYLES - Z-INDEX & MODERN DESIGN
+   ============================================================================ */
+
+// SweetAlert2 Z-Index Fix
+.swal2-container {
+  z-index: 99999 !important;
+}
+
+.swal2-popup {
+  z-index: 100000 !important;
+}
+
+// Modern Toast Styles
 .modern-toast-popup {
   border-radius: 16px !important;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+
+  &.swal2-show {
+    animation: slideInRight 0.3s ease-out !important;
+  }
+
+  &.swal2-hide {
+    animation: slideOutRight 0.3s ease-in !important;
+  }
 }
 
 .modern-toast-title {
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
 }
 
 .modern-toast-icon {
   border-width: 3px !important;
+  margin-top: 0.5rem !important;
 }
 
+// Modern SweetAlert Popup Styles
 .modern-swal-popup {
-  border-radius: 24px !important;
-  border: 1px solid rgba(0, 217, 255, 0.3) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(0, 217, 255, 0.2) !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   padding: 2rem !important;
+
+  .swal2-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #00d9ff 0%, #7b2ff7 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .swal2-html-container {
+    color: #b8bcc8 !important;
+    font-size: 1rem !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .swal2-icon {
+    border-color: transparent !important;
+
+    &.swal2-success {
+      border-color: #00d9ff !important;
+
+      .swal2-success-ring {
+        border-color: rgba(0, 217, 255, 0.3) !important;
+      }
+
+      [class^="swal2-success-line"] {
+        background-color: #00d9ff !important;
+      }
+    }
+
+    &.swal2-error {
+      border-color: #ff006e !important;
+
+      [class^="swal2-x-mark-line"] {
+        background-color: #ff006e !important;
+      }
+    }
+
+    &.swal2-warning {
+      border-color: #fbbf24 !important;
+      color: #fbbf24 !important;
+    }
+
+    &.swal2-info {
+      border-color: #00d9ff !important;
+      color: #00d9ff !important;
+    }
+  }
 }
 
 .modern-swal-title {
@@ -62,64 +149,125 @@
   margin: 1.5rem 0 !important;
 }
 
-.modern-swal-confirm,
-.modern-swal-cancel {
+.modern-swal-confirm {
+  background: linear-gradient(135deg, #00d9ff 0%, #7b2ff7 100%) !important;
+  border: none !important;
   border-radius: 12px !important;
   padding: 0.75rem 2rem !important;
   font-weight: 600 !important;
   font-size: 1rem !important;
-  border: none !important;
-  transition: all 0.3s ease !important;
   text-transform: none !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
 
   &:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 6px 24px rgba(0, 217, 255, 0.4) !important;
   }
-}
 
-.modern-swal-confirm {
-  background: linear-gradient(135deg, #00d9ff, #00b8d4) !important;
-
-  &:hover {
-    background: linear-gradient(135deg, #00f0ff, #00d0ea) !important;
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.3) !important;
   }
 }
 
 .modern-swal-cancel {
-  background: linear-gradient(135deg, #ff006e, #d90056) !important;
+  background: rgba(255, 0, 110, 0.1) !important;
+  border: 1px solid rgba(255, 0, 110, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: #ff006e !important;
+  transition: all 0.3s ease !important;
 
   &:hover {
-    background: linear-gradient(135deg, #ff1a7f, #e91065) !important;
+    background: rgba(255, 0, 110, 0.2) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 16px rgba(255, 0, 110, 0.2) !important;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.3) !important;
   }
 }
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-
-/* Global app background ---------------------------------------------------
-	 - Recommended: download the background image into `src/assets/` (e.g.
-		 `src/assets/app-bg.jpg`) and reference it with the `--app-bg-image` var.
-	 - As a fallback you can keep a remote URL (slower, depends on network).
-*/
-:root {
-	/* Try a local asset first. If you don't have a local copy, replace the URL
-		 below with a remote URL or use the commented example. */
-	--app-bg-image: url('assets/back.jpg');
-	/* --app-bg-image: url('https://img.freepik.com/free-vector/beautiful-book-club-pattern-illustration_23-2149330102.jpg'); */
+// Backdrop styling
+.swal2-backdrop-show {
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
 }
 
-html, body, app-root, ion-app {
-	height: 100%;
+// Animations
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+// Timer Progress Bar
+.swal2-timer-progress-bar {
+  background: linear-gradient(90deg, #00d9ff, #7b2ff7) !important;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .modern-swal-popup {
+    width: 90% !important;
+    max-width: 400px !important;
+
+    .swal2-title {
+      font-size: 1.3rem !important;
+    }
+
+    .swal2-html-container {
+      font-size: 0.95rem !important;
+    }
+  }
+
+  .modern-swal-confirm,
+  .modern-swal-cancel {
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ============================================================================
+   GLOBAL APP BACKGROUND
+   ============================================================================ */
+
+/* Global app background ---------------------------------------------------
+   - Recommended: download the background image into `src/assets/` (e.g.
+     `src/assets/app-bg.jpg`) and reference it with the `--app-bg-image` var.
+   - As a fallback you can keep a remote URL (slower, depends on network).
+*/
+// :root {
+//   /* Try a local asset first. If you don't have a local copy, replace the URL
+//      below with a remote URL or use the commented example. */
+//   // --app-bg-image: url('assets/back.jpg');
+//   /* --app-bg-image: url('https://img.freepik.com/free-vector/beautiful-book-club-pattern-illustration_23-2149330102.jpg'); */
+// }
+
+html,
+body,
+app-root,
+ion-app {
+  height: 100%;
 }
 
 /* Apply background to the app root so every page shares it */
@@ -128,25 +276,28 @@ ion-app,
 ion-router-outlet,
 .ion-page,
 body {
-	background-image: linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.28)), var(--app-bg-image);
-	background-size: cover;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed; /* optional: remove on mobile if unwanted */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
+    var(--app-bg-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* optional: remove on mobile if unwanted */
 }
 
 /* Ensure Ionic page/content backgrounds are transparent so the global
-	 background remains visible. Use component-specific overrides if needed. */
-ion-content, ion-app, .ion-page {
-	--background: transparent;
-	background: transparent !important;
+   background remains visible. Use component-specific overrides if needed. */
+ion-content,
+ion-app,
+.ion-page {
+  --background: transparent;
+  background: transparent !important;
 }
 
 /* Small-screen performance: disable fixed attachment on small devices */
 @media (max-width: 600px) {
-	app-root, ion-app, body {
-		background-attachment: scroll;
-	}
+  app-root,
+  ion-app,
+  body {
+    background-attachment: scroll;
+  }
 }
-
-

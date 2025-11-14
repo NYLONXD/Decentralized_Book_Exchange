@@ -1,3 +1,5 @@
+<!-- C:\my fk fold\CA\Decentralized_Book_Exchange\src\app\pages\books\books.page.html -->
+
 <ion-header translucent="true">
   <ion-toolbar color="primary">
     <ion-title>📚 Book Exchange</ion-title>
@@ -11,7 +13,6 @@
 </ion-header>
 
 <ion-content fullscreen class="books-page ion-padding">
-  
   <!-- User Info Header -->
   <div class="header">
     <h2>Welcome, <span class="user-name">{{ userName }}</span>! 👋</h2>
@@ -30,7 +31,7 @@
   <div class="books-grid" *ngIf="filteredBooks.length > 0">
     <ion-card *ngFor="let book of filteredBooks" class="book-card available">
       <div class="availability-badge available-badge">Available</div>
-      
+
       <img [src]="book.image" alt="{{ book.title }}" class="book-image" />
 
       <ion-card-header>
@@ -54,11 +55,12 @@
           </div>
         </div>
 
-        <ion-button 
-          expand="block" 
-          color="success" 
+        <ion-button
+          expand="block"
+          color="success"
           (click)="onExchangeBook(book)"
-          class="exchange-btn">
+          class="exchange-btn"
+        >
           <ion-icon name="swap-horizontal-outline" slot="start"></ion-icon>
           Exchange Book
         </ion-button>
@@ -74,7 +76,9 @@
   <!-- Books from Other Locations -->
   <div class="section-header other-section">
     <h3>🌍 Books from Other Locations</h3>
-    <p class="section-desc">Browse books from other states (Exchange not available)</p>
+    <p class="section-desc">
+      Browse books from other states (Exchange not available)
+    </p>
   </div>
 
   <div class="books-grid" *ngIf="otherBooks.length > 0">
@@ -82,7 +86,7 @@
       <div class="availability-badge unavailable-badge">
         Only in {{ book.location }}
       </div>
-      
+
       <img [src]="book.image" alt="{{ book.title }}" class="book-image" />
 
       <ion-card-header>
@@ -106,16 +110,16 @@
           </div>
         </div>
 
-        <ion-button 
-          expand="block" 
-          color="medium" 
+        <ion-button
+          expand="block"
+          color="medium"
           disabled
-          class="exchange-btn disabled-btn">
+          class="exchange-btn disabled-btn"
+        >
           <ion-icon name="close-circle-outline" slot="start"></ion-icon>
           Not Available in Your Area
         </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
-
 </ion-content>

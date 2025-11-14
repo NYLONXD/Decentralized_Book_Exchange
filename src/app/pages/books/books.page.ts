@@ -87,24 +87,28 @@ export class BooksPage implements OnInit {
   filteredBooks: Book[] = [];
   otherBooks: Book[] = [];
 
-  // Toast configuration
+  // Toast configuration with high z-index
   private Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3500,
+    timer: 2500,
     timerProgressBar: true,
     background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
     color: '#e8e9ed',
     iconColor: '#00d9ff',
     customClass: {
+      container: 'swal2-container-high-z',
       popup: 'modern-toast-popup',
       title: 'modern-toast-title',
-      icon: 'modern-toast-icon'
+      icon: 'modern-toast-icon',
     },
+    heightAuto: false,
     didOpen: (toast) => {
       toast.style.border = '1px solid rgba(0, 217, 255, 0.3)';
       toast.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
+      toast.style.borderRadius = '16px';
+      toast.style.zIndex = '99999';
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     },
@@ -114,7 +118,7 @@ export class BooksPage implements OnInit {
 
   ngOnInit() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    
+
     // If admin, redirect to dashboard
     if (currentUser.role === 'admin') {
       this.router.navigate(['/dashboard']);
@@ -172,13 +176,15 @@ export class BooksPage implements OnInit {
       background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
       color: '#e8e9ed',
       customClass: {
+        container: 'swal2-container-high-z',
         popup: 'modern-swal-popup',
         title: 'modern-swal-title',
         htmlContainer: 'modern-swal-html',
         confirmButton: 'modern-swal-confirm',
-        cancelButton: 'modern-swal-cancel'
+        cancelButton: 'modern-swal-cancel',
       },
-      backdrop: 'rgba(0, 0, 0, 0.8)'
+      backdrop: 'rgba(0, 0, 0, 0.8)',
+      heightAuto: false,
     });
 
     if (result.isConfirmed) {
@@ -193,16 +199,46 @@ export class BooksPage implements OnInit {
       });
       localStorage.setItem('exchanges', JSON.stringify(exchanges));
 
-      // Show success message
-      this.Toast.fire({
+      // Show success message with await
+      await this.Toast.fire({
         icon: 'success',
         title: 'Book exchange request sent!',
       });
     }
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/get-started']);
+  async logout() {
+    const result = await Swal.fire({
+      title: 'Logout',
+      text: 'Are you sure you want to logout?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#00d9ff',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Yes, Logout',
+      cancelButtonText: 'Cancel',
+      background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
+      color: '#e8e9ed',
+      customClass: {
+        container: 'swal2-container-high-z',
+        popup: 'modern-swal-popup',
+        title: 'modern-swal-title',
+        confirmButton: 'modern-swal-confirm',
+        cancelButton: 'modern-swal-cancel',
+      },
+      backdrop: 'rgba(0, 0, 0, 0.8)',
+      heightAuto: false,
+    });
+
+    if (result.isConfirmed) {
+      localStorage.removeItem('currentUser');
+
+      await this.Toast.fire({
+        icon: 'success',
+        title: 'Logged out successfully',
+      });
+
+      this.router.navigate(['/get-started']);
+    }
   }
 }

@@ -1,7 +1,8 @@
+<!-- src/app/pages/dashboard/dashboard.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>📊 Admin Dashboard</ion-title>
-    
+
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="logout()" title="Logout" color="light">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -13,186 +14,492 @@
       </ion-avatar>
     </ion-buttons>
   </ion-toolbar>
+
+  <!-- Tab Navigation -->
+  <ion-toolbar class="tab-toolbar">
+    <ion-segment
+      [(ngModel)]="activeTab"
+      (ionChange)="switchTab(activeTab)"
+      mode="md"
+    >
+      <ion-segment-button value="overview">
+        <ion-icon name="grid-outline"></ion-icon>
+        <ion-label>Overview</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="users">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Users</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="exchanges">
+        <ion-icon name="swap-horizontal-outline"></ion-icon>
+        <ion-label>Exchanges</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="books">
+        <ion-icon name="library-outline"></ion-icon>
+        <ion-label>Books</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="analytics">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <ion-label>Analytics</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding dashboard-bg">
+  <!-- ========== OVERVIEW TAB ========== -->
+  <div *ngIf="activeTab === 'overview'" class="tab-content">
+    <!-- Admin Welcome Section -->
+    <div class="intro-text">
+      <h2>Welcome Back, {{ userName }}! 👨‍💼</h2>
+      <span>
+        Monitor all books across different states, view statistics, and manage
+        the decentralized book exchange platform.
+      </span>
+    </div>
 
-  <!-- Admin Welcome Section -->
-  <div class="intro-text">
-    <h2>Welcome Back, {{ userName }}! 👨‍💼</h2>
-    <span>
-      Monitor all books across different states, view statistics, and manage the decentralized book exchange platform.
-      Here you will get the complete overview of the platform's performance and user engagement.
-    </span>
-  </div>
+    <!-- Enhanced Statistics Cards -->
+    <div class="stats-container">
+      <ion-card class="stat-card users-card">
+        <ion-card-content>
+          <div class="stat-content">
+            <div class="stat-icon-wrapper">
+              <ion-icon name="people-outline" class="stat-icon"></ion-icon>
+            </div>
+            <div class="stat-details">
+              <h3>{{ totalUsers }}</h3>
+              <p>Total Users</p>
+              <div class="stat-badge positive">+12% this month</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
 
-  <!-- Statistics Cards -->
-  <div class="stats-container">
-    <ion-card class="stat-card">
+      <ion-card class="stat-card books-card">
+        <ion-card-content>
+          <div class="stat-content">
+            <div class="stat-icon-wrapper">
+              <ion-icon name="book-outline" class="stat-icon"></ion-icon>
+            </div>
+            <div class="stat-details">
+              <h3>{{ totalBooks }}</h3>
+              <p>Total Books</p>
+              <div class="stat-badge positive">+8% this week</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="stat-card exchanges-card">
+        <ion-card-content>
+          <div class="stat-content">
+            <div class="stat-icon-wrapper">
+              <ion-icon
+                name="swap-horizontal-outline"
+                class="stat-icon"
+              ></ion-icon>
+            </div>
+            <div class="stat-details">
+              <h3>{{ activeExchanges }}</h3>
+              <p>Pending Exchanges</p>
+              <div class="stat-badge warning">{{ totalExchanges }} total</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="stat-card locations-card">
+        <ion-card-content>
+          <div class="stat-content">
+            <div class="stat-icon-wrapper">
+              <ion-icon name="location-outline" class="stat-icon"></ion-icon>
+            </div>
+            <div class="stat-details">
+              <h3>{{ locations.length - 1 }}</h3>
+              <p>Active States</p>
+              <div class="stat-badge info">Nationwide</div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Recent Activity Feed -->
+    <ion-card class="activity-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="time-outline"></ion-icon>
+          Recent Activity
+        </ion-card-title>
+      </ion-card-header>
       <ion-card-content>
-        <div class="stat-content">
-          <ion-icon name="people-outline"  class="stat-icon"></ion-icon>
-          <div>
-            <h3>{{ totalUsers }}</h3>
-            <p>Total Users</p>
+        <div class="activity-list" *ngIf="recentActivities.length > 0">
+          <div class="activity-item" *ngFor="let activity of recentActivities">
+            <div
+              class="activity-icon"
+              [style.background-color]="activity.color"
+            >
+              <ion-icon [name]="activity.icon"></ion-icon>
+            </div>
+            <div class="activity-details">
+              <p class="activity-user">{{ activity.user }}</p>
+              <p class="activity-action">{{ activity.action }}</p>
+            </div>
+            <span class="activity-time">{{ activity.time }}</span>
+          </div>
+        </div>
+        <div class="no-activity" *ngIf="recentActivities.length === 0">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <p>No recent activity</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Books Distribution -->
+    <ion-card class="breakdown-card">
+      <ion-card-header>
+        <ion-card-title>📍 Books Distribution by State</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="state-stats">
+          <div class="state-item" *ngFor="let location of locations">
+            <div class="state-info" *ngIf="location !== 'All'">
+              <span class="location-name">{{ location }}</span>
+              <span class="book-count"
+                >{{ booksByState[location] || 0 }} books</span
+              >
+            </div>
+            <div class="state-bar" *ngIf="location !== 'All'">
+              <div
+                class="bar-fill"
+                [style.width.%]="(booksByState[location] || 0) / totalBooks * 100"
+              ></div>
+            </div>
           </div>
         </div>
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="stat-card">
-      <ion-card-content>
-        <div class="stat-content">
-          <ion-icon name="book-outline" class="stat-icon"></ion-icon>
-          <div>
-            <h3>{{ totalBooks }}</h3>
-            <p>Total Books</p>
+    <!-- Featured Books Slider -->
+    <div class="book-slider-section" *ngIf="books && books.length">
+      <h2 class="text-center mb-3 bg-success text-white p-2 rounded">
+        🔥 Featured Books
+      </h2>
+
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let book of books">
+            <ion-card class="book-card">
+              <img [src]="book.image" alt="{{ book.title }}" class="book-img" />
+              <ion-card-header>
+                <ion-card-title>{{ book.title }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Price:</strong> {{ book.price }}</p>
+              </ion-card-content>
+            </ion-card>
           </div>
         </div>
-      </ion-card-content>
-    </ion-card>
 
-    <ion-card class="stat-card">
-      <ion-card-content>
-        <div class="stat-content">
-          <ion-icon name="location-outline" class="stat-icon"></ion-icon>
-          <div>
-            <h3>{{ locations.length - 1 }}</h3>
-            <p>Active States</p>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <!-- Books by State Breakdown -->
-  <ion-card class="breakdown-card">
-    <ion-card-header>
-      <ion-card-title>📍 Books Distribution by State</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="state-stats">
-        <div class="state-item" *ngFor="let location of locations">
-          <span class="location-name" *ngIf="location !== 'All'">{{ location }}</span>
-          <span class="book-count" *ngIf="location !== 'All'">{{ booksByState[location] || 0 }} books</span>
-        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Filter Section -->
-  <div class="filter-section">
-    <ion-card>
-      <ion-card-content>
-        <div class="filter-content">
-          <ion-label class="filter-label">Filter by Location:</ion-label>
-          <ion-select [(ngModel)]="selectedLocation" (ionChange)="onLocationChange()" interface="popover" placeholder="Select State">
-            <ion-select-option *ngFor="let location of locations" [value]="location">
-              {{ location }}
-            </ion-select-option>
-          </ion-select>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <!-- Featured Books Slider -->
-  <div class="book-slider-section" *ngIf="books && books.length">
-    <h2 class="text-center mb-3 bg-success text-white p-2 rounded">🔥 Featured Books</h2>
-
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" *ngFor="let book of books">
-          <ion-card class="book-card">
-            <img [src]="book.image" alt="{{ book.title }}" class="book-img" />
-            <ion-card-header>
-              <ion-card-title>{{ book.title }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p><strong>Author:</strong> {{ book.author }}</p>
-              <p><strong>Price:</strong> {{ book.price }}</p>
-            </ion-card-content>
-          </ion-card>
-        </div>
-      </div>
-      
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
     </div>
   </div>
 
-  <!-- All Books Grid (Filtered) -->
-  <div class="books-section">
-    <h2 class="section-title">
-      📚 All Books 
-      <span *ngIf="selectedLocation !== 'All'"> in {{ selectedLocation }}</span>
-      <span class="book-count-badge">{{ displayedBooks.length }}</span>
-    </h2>
+  <!-- ========== USERS TAB ========== -->
+  <div *ngIf="activeTab === 'users'" class="tab-content">
+    <div class="section-header">
+      <h2>👥 User Management</h2>
+      <p>Total Users: <strong>{{ totalUsers }}</strong></p>
+    </div>
 
-    <div class="book-grid">
-      <ion-card class="book-card-detailed" *ngFor="let book of displayedBooks">
-        <div class="book-badge">{{ book.location }}</div>
-        <img [src]="book.image" alt="{{ book.title }}" class="book-img"/>
+    <ion-card class="users-table-card">
+      <ion-card-content>
+        <div class="table-responsive">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Joined</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of allUsers; let i = index" class="user-row">
+                <td>{{ i + 1 }}</td>
+                <td class="user-name">
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  {{ user.name }}
+                </td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <ion-badge color="primary">{{ user.address }}</ion-badge>
+                </td>
+                <td>{{ getTimeAgo(user.joinedDate!) }}</td>
+                <td>
+                  <ion-badge
+                    [color]="user.role === 'admin' ? 'warning' : 'success'"
+                  >
+                    {{ user.role }}
+                  </ion-badge>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- ========== EXCHANGES TAB ========== -->
+  <div *ngIf="activeTab === 'exchanges'" class="tab-content">
+    <div class="section-header">
+      <h2>🔄 Exchange Requests</h2>
+      <p>
+        Pending: <strong>{{ activeExchanges }}</strong> | Total:
+        <strong>{{ totalExchanges }}</strong>
+      </p>
+    </div>
+
+    <div class="exchanges-grid">
+      <ion-card class="exchange-card" *ngFor="let exchange of allExchanges">
         <ion-card-header>
-          <ion-card-title>{{ book.title }}</ion-card-title>
-          <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+          <ion-card-subtitle>
+            <ion-badge [color]="getStatusColor(exchange.status!)">
+              {{ exchange.status }}
+            </ion-badge>
+          </ion-card-subtitle>
+          <ion-card-title>{{ exchange.book }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <div class="book-details">
-            <p><ion-icon name="person-outline"></ion-icon> <strong>Owner:</strong> {{ book.owner }}</p>
-            <p><ion-icon name="location-outline"></ion-icon> <strong>Location:</strong> {{ book.location }}</p>
-            <p class="price"><ion-icon name="pricetag-outline"></ion-icon> <strong>Price:</strong> {{ book.price }}</p>
+          <div class="exchange-details">
+            <p>
+              <ion-icon name="person-outline"></ion-icon>
+              <strong>Requester:</strong> {{ exchange.requester }}
+            </p>
+            <p>
+              <ion-icon name="person-outline"></ion-icon>
+              <strong>Owner:</strong> {{ exchange.owner }}
+            </p>
+            <p>
+              <ion-icon name="location-outline"></ion-icon>
+              <strong>Location:</strong> {{ exchange.location }}
+            </p>
+            <p>
+              <ion-icon name="time-outline"></ion-icon>
+              <strong>Date:</strong> {{ getTimeAgo(exchange.date) }}
+            </p>
+          </div>
+
+          <div class="exchange-actions" *ngIf="exchange.status === 'pending'">
+            <ion-button
+              expand="block"
+              color="success"
+              size="small"
+              (click)="approveExchange(exchange)"
+            >
+              <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+              Approve
+            </ion-button>
+            <ion-button
+              expand="block"
+              color="danger"
+              size="small"
+              (click)="rejectExchange(exchange)"
+            >
+              <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+              Reject
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="no-data" *ngIf="allExchanges.length === 0">
+      <ion-icon name="swap-horizontal-outline"></ion-icon>
+      <p>No exchange requests yet</p>
+    </div>
+  </div>
+
+  <!-- ========== BOOKS TAB ========== -->
+  <div *ngIf="activeTab === 'books'" class="tab-content">
+    <div class="section-header">
+      <h2>📚 Book Management</h2>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <ion-card>
+        <ion-card-content>
+          <div class="filter-content">
+            <ion-label class="filter-label">Filter by Location:</ion-label>
+            <ion-select
+              [(ngModel)]="selectedLocation"
+              (ionChange)="onLocationChange()"
+              interface="popover"
+              placeholder="Select State"
+            >
+              <ion-select-option
+                *ngFor="let location of locations"
+                [value]="location"
+              >
+                {{ location }}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Books Grid -->
+    <div class="books-section">
+      <h3 class="section-subtitle">
+        Total Books: <strong>{{ displayedBooks.length }}</strong>
+        <span *ngIf="selectedLocation !== 'All'">
+          in {{ selectedLocation }}</span
+        >
+      </h3>
+
+      <div class="book-grid">
+        <ion-card
+          class="book-card-detailed"
+          *ngFor="let book of displayedBooks"
+        >
+          <div class="book-badge">{{ book.location }}</div>
+          <img [src]="book.image" alt="{{ book.title }}" class="book-img" />
+          <ion-card-header>
+            <ion-card-title>{{ book.title }}</ion-card-title>
+            <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="book-details">
+              <p>
+                <ion-icon name="person-outline"></ion-icon>
+                <strong>Owner:</strong> {{ book.owner }}
+              </p>
+              <p>
+                <ion-icon name="location-outline"></ion-icon>
+                <strong>Location:</strong> {{ book.location }}
+              </p>
+              <p class="price">
+                <ion-icon name="pricetag-outline"></ion-icon>
+                <strong>Price:</strong> {{ book.price }}
+              </p>
+              <p>
+                <ion-icon name="calendar-outline"></ion-icon>
+                <strong>Added:</strong> {{ getTimeAgo(book.addedDate!) }}
+              </p>
+            </div>
+
+            <ion-button
+              expand="block"
+              color="danger"
+              size="small"
+              (click)="deleteBook(book)"
+            >
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Delete Book
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ANALYTICS TAB ========== -->
+  <div *ngIf="activeTab === 'analytics'" class="tab-content">
+    <div class="section-header">
+      <h2>📊 Platform Analytics</h2>
+    </div>
+
+    <div class="analytics-grid">
+      <!-- Quick Stats -->
+      <ion-card class="analytics-card">
+        <ion-card-header>
+          <ion-card-title>Platform Overview</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="analytics-stat">
+            <ion-icon name="people-outline" color="primary"></ion-icon>
+            <div>
+              <h3>{{ totalUsers }}</h3>
+              <p>Total Users</p>
+            </div>
+          </div>
+          <div class="analytics-stat">
+            <ion-icon name="book-outline" color="success"></ion-icon>
+            <div>
+              <h3>{{ totalBooks }}</h3>
+              <p>Total Books</p>
+            </div>
+          </div>
+          <div class="analytics-stat">
+            <ion-icon name="swap-horizontal-outline" color="warning"></ion-icon>
+            <div>
+              <h3>{{ totalExchanges }}</h3>
+              <p>Total Exchanges</p>
+            </div>
+          </div>
+          <div class="analytics-stat">
+            <ion-icon name="location-outline" color="tertiary"></ion-icon>
+            <div>
+              <h3>{{ locations.length - 1 }}</h3>
+              <p>Active Locations</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Location Breakdown -->
+      <ion-card class="analytics-card">
+        <ion-card-header>
+          <ion-card-title>Books by Location</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="location-chart">
+            <div class="chart-item" *ngFor="let location of locations">
+              <div class="chart-label" *ngIf="location !== 'All'">
+                <span>{{ location }}</span>
+                <strong>{{ booksByState[location] || 0 }}</strong>
+              </div>
+              <div class="chart-bar" *ngIf="location !== 'All'">
+                <div
+                  class="bar-fill"
+                  [style.width.%]="(booksByState[location] || 0) / totalBooks * 100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Top Locations -->
+      <ion-card class="analytics-card">
+        <ion-card-header>
+          <ion-card-title>Top Performing States</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="top-locations">
+            <div
+              class="top-location-item"
+              *ngFor="let location of locations; let i = index"
+            >
+              <div class="rank" *ngIf="location !== 'All' && i < 4">
+                {{ i }}
+              </div>
+              <div class="location-details" *ngIf="location !== 'All' && i < 4">
+                <h4>{{ location }}</h4>
+                <p>{{ booksByState[location] || 0 }} books available</p>
+              </div>
+            </div>
           </div>
         </ion-card-content>
       </ion-card>
     </div>
   </div>
-
-  <!-- Bootstrap Carousel Section -->
-  <div class="carousel-container mt-4">
-    <h2 class="text-center mb-3 bg-success text-white p-2 rounded">📚 Best Selling Books</h2>
-    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
-      
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="2"></button>
-      </div>
-
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="assets/harry_potter.jpg" class="d-block w-100" alt="Harry Potter">
-          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-            <h5>Harry Potter and the Sorcerer's Stone</h5>
-            <p>Author: J.K. Rowling | Price: $25</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="assets/youcandoit.jpg" class="d-block w-100" alt="You Can Do It">
-          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-            <h5>You Can Do It</h5>
-            <p>Author: Dr. A.P.J. Abdul Kalam | Price: $15</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="assets/darkpsychology.jpg" class="d-block w-100" alt="Dark Psychology">
-          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-            <h5>Dark Psychology</h5>
-            <p>Author: Dr. Shefali | Price: $22</p>
-          </div>
-        </div>
-      </div>
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-
-    </div>
-  </div>
-
 </ion-content>

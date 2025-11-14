@@ -1,3 +1,4 @@
+<!-- C:\my fk fold\CA\Decentralized_Book_Exchange\src\app\pages\login\login.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Login</ion-title>
@@ -20,17 +21,33 @@
           <!-- Email -->
           <ion-item lines="full" class="ion-margin-bottom">
             <ion-label position="floating">Email</ion-label>
-            <ion-input name="email" ngModel required type="email" autocomplete="email"></ion-input>
+            <ion-input
+              name="email"
+              ngModel
+              required
+              type="email"
+              autocomplete="email"
+            ></ion-input>
           </ion-item>
 
           <!-- Password -->
           <ion-item lines="full" class="ion-margin-bottom">
             <ion-label position="floating">Password</ion-label>
-            <ion-input name="password" ngModel required type="password" autocomplete="current-password"></ion-input>
+            <ion-input
+              name="password"
+              ngModel
+              required
+              type="password"
+              autocomplete="current-password"
+            ></ion-input>
           </ion-item>
 
           <!-- Login button -->
-          <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
             Log In
           </ion-button>
         </form>
@@ -42,11 +59,21 @@
 
         <!-- Social login buttons -->
         <div class="social-row">
-          <ion-button fill="outline" expand="block" (click)="onSocial('google')" class="social-btn">
+          <ion-button
+            fill="outline"
+            expand="block"
+            (click)="onSocial('google')"
+            class="social-btn"
+          >
             <ion-icon slot="start" name="logo-google"></ion-icon>
             Continue with Google
           </ion-button>
-          <ion-button fill="outline" expand="block" (click)="onSocial('facebook')" class="social-btn">
+          <ion-button
+            fill="outline"
+            expand="block"
+            (click)="onSocial('facebook')"
+            class="social-btn"
+          >
             <ion-icon slot="start" name="logo-facebook"></ion-icon>
             Continue with Facebook
           </ion-button>

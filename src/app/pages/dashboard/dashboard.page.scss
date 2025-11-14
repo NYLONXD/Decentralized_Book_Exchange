@@ -48,7 +48,7 @@
 
 //   ul {
 //     padding-left: 20px;
-    
+
 //     li {
 //       margin: 8px 0;
 //       color: #555;
@@ -179,7 +179,7 @@
 
 //       ion-card-header {
 //         padding: 12px;
-        
+
 //         ion-card-title {
 //           font-size: 0.95rem;
 //           font-weight: 600;
@@ -246,7 +246,6 @@
 //   }
 // }
 
-
 .dashboard-bg {
   background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
   min-height: 100vh;
@@ -255,16 +254,27 @@
 
   // Animated particles background
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(123, 47, 247, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(255, 0, 110, 0.03) 0%, transparent 50%);
+    background-image: radial-gradient(
+        circle at 20% 30%,
+        rgba(0, 217, 255, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(123, 47, 247, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 0, 110, 0.03) 0%,
+        transparent 50%
+      );
     animation: particleFloat 20s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
@@ -341,7 +351,7 @@
         padding: 0.5rem 0;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 0;
@@ -376,9 +386,9 @@
 
       ion-avatar {
         position: relative;
-        
+
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           inset: -3px;
           border-radius: 50%;
@@ -418,7 +428,7 @@
     .nav-links {
       flex-direction: column;
       gap: 0;
-      
+
       a {
         padding: 1rem;
         width: 100%;
@@ -444,21 +454,24 @@
   backdrop-filter: blur(20px);
   border-radius: 24px;
   border: 1px solid rgba(0, 217, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-              0 0 0 1px rgba(0, 217, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 217, 255, 0.05);
   max-width: 900px;
   animation: fadeInUp 0.8s ease;
   position: relative;
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(0, 217, 255, 0.03) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(0, 217, 255, 0.03) 0%,
+      transparent 70%
+    );
     animation: rotate 10s linear infinite;
     pointer-events: none;
   }
@@ -504,13 +517,18 @@
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 217, 255, 0.1),
+      transparent
+    );
     transition: left 0.6s ease;
   }
 
@@ -535,7 +553,7 @@
 
   ul {
     padding-left: 20px;
-    
+
     li {
       margin: 12px 0;
       color: #d1d5db;
@@ -544,7 +562,7 @@
       transition: all 0.3s ease;
 
       &::before {
-        content: '▹';
+        content: "▹";
         position: absolute;
         left: -10px;
         color: #00d9ff;
@@ -579,13 +597,17 @@
     animation: fadeInScale 0.6s ease both;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       left: 50%;
       width: 0;
       height: 0;
-      background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%);
+      background: radial-gradient(
+        circle,
+        rgba(0, 217, 255, 0.2) 0%,
+        transparent 70%
+      );
       border-radius: 50%;
       transform: translate(-50%, -50%);
       transition: all 0.6s ease;
@@ -621,7 +643,7 @@
       font-weight: 700;
       padding: 1rem;
       background: rgba(0, 0, 0, 0.3);
-      
+
       ion-card-title {
         color: #e8e9ed;
         font-size: 1rem;
@@ -649,8 +671,7 @@
   margin: 4rem auto;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
-              0 0 0 1px rgba(0, 217, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 217, 255, 0.1);
   background: rgba(17, 18, 22, 0.6);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -670,7 +691,11 @@
   }
 
   .carousel-caption {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 100%
+    );
     padding: 2rem;
 
     h5 {
@@ -729,7 +754,11 @@
     }
 
     .book-card {
-      background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(123, 47, 247, 0.1) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(0, 217, 255, 0.1) 0%,
+        rgba(123, 47, 247, 0.1) 100%
+      );
       backdrop-filter: blur(10px);
       border: 1px solid rgba(0, 217, 255, 0.2);
       color: #fff;
@@ -741,13 +770,17 @@
       position: relative;
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -100%;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 217, 255, 0.2), transparent);
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 217, 255, 0.2),
+          transparent
+        );
         transition: top 0.6s ease;
       }
 
@@ -776,7 +809,7 @@
 
       ion-card-header {
         padding: 1rem;
-        
+
         ion-card-title {
           font-size: 1rem;
           font-weight: 700;
@@ -861,7 +894,8 @@
 }
 
 @keyframes particleFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
@@ -873,7 +907,8 @@
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -882,7 +917,8 @@
 }
 
 @keyframes textGlow {
-  0%, 100% {
+  0%,
+  100% {
     filter: drop-shadow(0 0 5px rgba(0, 217, 255, 0.5));
   }
   50% {
@@ -891,7 +927,8 @@
 }
 
 @keyframes avatarPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
@@ -1054,5 +1091,847 @@
 
   .intro-text h2 {
     font-size: 1.5rem;
+  }
+}
+// Enhanced Dashboard Styles - ALL FEATURES
+
+// Tab Toolbar
+.tab-toolbar {
+  --background: rgba(17, 18, 22, 0.95);
+  --border-color: rgba(0, 217, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+
+  ion-segment {
+    --background: transparent;
+
+    ion-segment-button {
+      --color: #9ca3af;
+      --color-checked: #00d9ff;
+      --indicator-color: #00d9ff;
+      --indicator-height: 3px;
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: none;
+      transition: all 0.3s ease;
+
+      ion-icon {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+      }
+
+      &.segment-button-checked {
+        ion-icon {
+          animation: bounceIn 0.5s ease;
+        }
+      }
+
+      &:hover {
+        --color: #00d9ff;
+      }
+    }
+  }
+}
+
+// Tab Content Container
+.tab-content {
+  animation: fadeInUp 0.5s ease;
+}
+
+// Enhanced Statistics Cards
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  .stat-card {
+    background: rgba(17, 18, 22, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    animation: scaleIn 0.6s ease both;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(0, 217, 255, 0.05) 0%,
+        transparent 70%
+      );
+      animation: rotate 10s linear infinite;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(0, 217, 255, 0.2);
+      border-color: rgba(0, 217, 255, 0.3);
+    }
+
+    .stat-content {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.5rem;
+      position: relative;
+      z-index: 1;
+
+      .stat-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 217, 255, 0.1),
+          rgba(123, 47, 247, 0.1)
+        );
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        transition: all 0.3s ease;
+
+        .stat-icon {
+          font-size: 2rem;
+          color: #00d9ff;
+        }
+      }
+
+      .stat-details {
+        flex: 1;
+
+        h3 {
+          font-size: 2.5rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin: 0;
+          line-height: 1;
+        }
+
+        p {
+          color: #b8bcc8;
+          font-size: 0.95rem;
+          font-weight: 500;
+          margin: 0.5rem 0;
+        }
+
+        .stat-badge {
+          display: inline-block;
+          padding: 0.25rem 0.75rem;
+          border-radius: 12px;
+          font-size: 0.75rem;
+          font-weight: 600;
+
+          &.positive {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+          }
+
+          &.warning {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+          }
+
+          &.info {
+            background: rgba(0, 217, 255, 0.15);
+            color: #00d9ff;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+          }
+        }
+      }
+    }
+
+    &:hover .stat-icon-wrapper {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 24px rgba(0, 217, 255, 0.3);
+    }
+  }
+}
+
+// Recent Activity Card
+.activity-card {
+  background: rgba(17, 18, 22, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  border-radius: 20px;
+  margin: 2rem 0;
+  animation: fadeInUp 0.6s ease 0.3s both;
+
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #e8e9ed;
+    font-weight: 700;
+    font-size: 1.3rem;
+
+    ion-icon {
+      color: #00d9ff;
+      font-size: 1.5rem;
+    }
+  }
+
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      animation: slideInRight 0.5s ease both;
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
+
+      &:hover {
+        background: rgba(0, 217, 255, 0.05);
+        border-color: rgba(0, 217, 255, 0.2);
+        transform: translateX(8px);
+      }
+
+      .activity-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ion-icon {
+          font-size: 1.5rem;
+          color: white;
+        }
+      }
+
+      .activity-details {
+        flex: 1;
+
+        .activity-user {
+          font-weight: 700;
+          color: #e8e9ed;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .activity-action {
+          color: #9ca3af;
+          font-size: 0.9rem;
+          margin: 0;
+        }
+      }
+
+      .activity-time {
+        color: #6b7280;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .no-activity {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+
+    ion-icon {
+      font-size: 4rem;
+      color: rgba(0, 217, 255, 0.2);
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Enhanced Breakdown Card
+.breakdown-card {
+  background: rgba(17, 18, 22, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  border-radius: 20px;
+  margin: 2rem 0;
+  animation: fadeInUp 0.6s ease 0.4s both;
+
+  .state-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .state-item {
+      animation: slideInLeft 0.5s ease both;
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
+
+      .state-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        .location-name {
+          font-weight: 700;
+          color: #e8e9ed;
+          font-size: 1rem;
+        }
+
+        .book-count {
+          color: #00d9ff;
+          font-weight: 600;
+          font-size: 0.95rem;
+        }
+      }
+
+      .state-bar {
+        height: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+
+        .bar-fill {
+          height: 100%;
+          background: linear-gradient(90deg, #00d9ff, #7b2ff7);
+          border-radius: 6px;
+          transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.3),
+              transparent
+            );
+            animation: shimmer 2s infinite;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Users Table
+.users-table-card {
+  background: rgba(17, 18, 22, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  border-radius: 20px;
+  margin: 2rem 0;
+  animation: fadeInUp 0.6s ease;
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .users-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background: rgba(0, 217, 255, 0.05);
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 700;
+        color: #00d9ff;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid rgba(0, 217, 255, 0.2);
+      }
+    }
+
+    tbody {
+      .user-row {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        animation: fadeIn 0.5s ease both;
+
+        @for $i from 1 through 20 {
+          &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.05}s;
+          }
+        }
+
+        &:hover {
+          background: rgba(0, 217, 255, 0.05);
+          transform: scale(1.01);
+        }
+
+        td {
+          padding: 1rem;
+          color: #d1d5db;
+          font-size: 0.95rem;
+
+          &.user-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #e8e9ed;
+
+            ion-icon {
+              font-size: 1.5rem;
+              color: #00d9ff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Exchanges Grid
+.exchanges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  .exchange-card {
+    background: rgba(17, 18, 22, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    animation: scaleIn 0.5s ease both;
+
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.08}s;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0, 217, 255, 0.2);
+      border-color: rgba(0, 217, 255, 0.3);
+    }
+
+    ion-card-title {
+      color: #e8e9ed;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .exchange-details {
+      margin: 1rem 0;
+
+      p {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #d1d5db;
+        margin: 0.75rem 0;
+        font-size: 0.9rem;
+
+        ion-icon {
+          color: #00d9ff;
+          font-size: 1.2rem;
+        }
+
+        strong {
+          color: #b8bcc8;
+          margin-right: 0.25rem;
+        }
+      }
+    }
+
+    .exchange-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+
+      ion-button {
+        flex: 1;
+        font-weight: 600;
+        text-transform: none;
+      }
+    }
+  }
+}
+
+// Section Headers
+.section-header {
+  text-align: center;
+  margin: 2rem 0;
+  animation: fadeInDown 0.6s ease;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #9ca3af;
+    font-size: 1rem;
+
+    strong {
+      color: #00d9ff;
+      font-weight: 700;
+    }
+  }
+}
+
+.section-subtitle {
+  color: #b8bcc8;
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+
+  strong {
+    color: #00d9ff;
+    font-weight: 700;
+  }
+}
+
+// Analytics Grid
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+
+  .analytics-card {
+    background: rgba(17, 18, 22, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 217, 255, 0.1);
+    border-radius: 20px;
+    animation: fadeInUp 0.6s ease both;
+
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+
+    ion-card-title {
+      color: #e8e9ed;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .analytics-stat {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(0, 217, 255, 0.05);
+        border-color: rgba(0, 217, 255, 0.2);
+        transform: translateX(8px);
+      }
+
+      ion-icon {
+        font-size: 2.5rem;
+      }
+
+      h3 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #e8e9ed;
+        margin: 0;
+      }
+
+      p {
+        color: #9ca3af;
+        margin: 0.25rem 0 0 0;
+        font-size: 0.9rem;
+      }
+    }
+
+    .location-chart {
+      .chart-item {
+        margin-bottom: 1.5rem;
+
+        .chart-label {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.5rem;
+
+          span {
+            color: #e8e9ed;
+            font-weight: 600;
+          }
+
+          strong {
+            color: #00d9ff;
+            font-weight: 700;
+          }
+        }
+
+        .chart-bar {
+          height: 12px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 6px;
+          overflow: hidden;
+
+          .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d9ff, #7b2ff7);
+            border-radius: 6px;
+            transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+        }
+      }
+    }
+
+    .top-locations {
+      .top-location-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(0, 217, 255, 0.05);
+          border-color: rgba(0, 217, 255, 0.2);
+          transform: scale(1.02);
+        }
+
+        .rank {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #00d9ff, #7b2ff7);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 800;
+          font-size: 1.2rem;
+          color: white;
+        }
+
+        .location-details {
+          flex: 1;
+
+          h4 {
+            color: #e8e9ed;
+            font-weight: 700;
+            margin: 0 0 0.25rem 0;
+          }
+
+          p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// No Data State
+.no-data {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6b7280;
+
+  ion-icon {
+    font-size: 5rem;
+    color: rgba(0, 217, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .tab-toolbar ion-segment {
+    ion-segment-button {
+      font-size: 0.75rem;
+
+      ion-icon {
+        font-size: 1rem;
+      }
+
+      ion-label {
+        display: none;
+      }
+    }
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .exchanges-grid,
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .users-table-card {
+    font-size: 0.85rem;
+
+    .users-table {
+      thead th {
+        padding: 0.75rem 0.5rem;
+      }
+
+      tbody td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
   }
 }

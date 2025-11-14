@@ -18,29 +18,32 @@ import Swal from 'sweetalert2';
 export class LoginPage {
   // Admin credentials
   private readonly ADMIN_EMAIL = 'admin@gmail.com';
-  private readonly ADMIN_PASSWORD = 'admin123'; // You can change this
+  private readonly ADMIN_PASSWORD = 'admin123';
 
   constructor(private router: Router) {}
 
-  // Toast configuration
+  // Toast configuration with high z-index
   private Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3500,
+    timer: 2000,
     timerProgressBar: true,
     background: 'linear-gradient(135deg, #1a1c24 0%, #111216 100%)',
     color: '#e8e9ed',
     iconColor: '#00d9ff',
     customClass: {
+      container: 'swal2-container-high-z',
       popup: 'modern-toast-popup',
       title: 'modern-toast-title',
-      icon: 'modern-toast-icon'
+      icon: 'modern-toast-icon',
     },
+    heightAuto: false,
     didOpen: (toast) => {
       toast.style.border = '1px solid rgba(0, 217, 255, 0.3)';
       toast.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.5)';
       toast.style.borderRadius = '16px';
+      toast.style.zIndex = '99999';
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     },
@@ -68,14 +71,14 @@ export class LoginPage {
 
       localStorage.setItem('currentUser', JSON.stringify(adminUser));
 
-      this.Toast.fire({
+      // Show toast and navigate after it closes
+      await this.Toast.fire({
         icon: 'success',
         title: 'Admin logged in successfully',
       });
 
-      setTimeout(() => {
-        this.router.navigate(['/dashboard']);
-      }, 1500);
+      // Navigate after toast is done
+      this.router.navigate(['/dashboard']);
       return;
     }
 
@@ -90,14 +93,14 @@ export class LoginPage {
       user.role = 'user';
       localStorage.setItem('currentUser', JSON.stringify(user));
 
-      this.Toast.fire({
+      // Show toast and navigate after it closes
+      await this.Toast.fire({
         icon: 'success',
         title: 'Signed in successfully',
       });
 
-      setTimeout(() => {
-        this.router.navigate(['/books']);
-      }, 1500);
+      // Navigate after toast is done
+      this.router.navigate(['/books']);
     } else {
       this.Toast.fire({
         icon: 'error',
